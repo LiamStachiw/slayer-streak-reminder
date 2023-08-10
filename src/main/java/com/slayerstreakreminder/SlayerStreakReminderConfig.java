@@ -8,12 +8,10 @@ import net.runelite.client.config.ConfigItem;
 public interface SlayerStreakReminderConfig extends Config
 {
 	@ConfigItem(
-		keyName = "greeting",
-		name = "Welcome Greeting",
-		description = "The message to show to the user when they login"
+            position = 1,
+            keyName = "booleanConfig",
+            name = "Add borders to message",
+            description = "Add a line of stars before and after the message to make it more noticeable?"
 	)
-	default String greeting()
-	{
-		return "Hello";
-	}
+    default boolean booleanConfig(){ return true; }
 }
