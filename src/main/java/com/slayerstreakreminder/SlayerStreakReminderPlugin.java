@@ -45,21 +45,19 @@ public class SlayerStreakReminderPlugin extends Plugin
 				(chatMessage.getMessage().contains("; return to a Slayer master.") ||
 				 chatMessage.getMessage().contains("You'll be eligible to earn reward points if you complete tasks from a more advanced Slayer Master."))){
 
-			Matcher matcher = Pattern.compile("\\d+").matcher(chatMessage.getMessage());
+			String taskCompleteMessage = chatMessage.getMessage().replaceAll("<[^>]+>", "");
+
+			Matcher matcher = Pattern.compile("\\d+").matcher(taskCompleteMessage);
 
 			if(matcher.find()){
 				int taskNum = Integer.parseInt(matcher.group());
 
-                if(config.booleanConfig()) client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "******************************************************", null);
-                //TODO: Fix the taskNum calculation
 				if((taskNum + 1) % 10 == 0){
-                    client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Your next slayer task will give bonus points. Make sure you go to the correct Slayer master!", null);
-                } else {
-                    client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Your next slayer task will NOT give bonus points. Get fucked nerd.", null);
-                }
-                if(config.booleanConfig()) client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "******************************************************", null);
+					if(config.booleanConfig()) client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "******************************************************", null);
+					client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Your next slayer task will give bonus points. Make sure you go to the correct Slayer master!", null);
+					if(config.booleanConfig()) client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "******************************************************", null);
+				}
             }
-
 		}
 	}
 
